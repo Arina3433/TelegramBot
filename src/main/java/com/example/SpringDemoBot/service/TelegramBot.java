@@ -18,18 +18,19 @@ import java.util.List;
 @Slf4j
 public class TelegramBot extends TelegramLongPollingBot {
     private static final String SMILE = "\uD83D\uDE0A";
-    private static final String HEART = "❤";
-    private static final String STARS = "✨";
-    private static final String FIRE = "\uD83D\uDD25";
+    private static final String SMILE_WITH_TEAR = "\uD83E\uDD72";
+    private static final String SAD_AND_WORRIED = "\uD83D\uDE25";
+    private static final String CRYING_FACE = "\uD83D\uDE22";
 
-    private static final String HELP_TEXT = "Я даже не знаю чем вам можно помочь..\n\n" +
-            "Но этот бот пока просто хрени пишет\n\n" +
-            "Нажми на /start чтобы поздороваться\n\n" +
-            "Нажми на /my_data и должна появиться информация о тебе, но ее пока нет :(\n\n" +
-            "Нажми на /delete_data и можно удалить информацию о себе, но такого пока тоже нет :(\n\n" +
-            "Потом что нибудь добавлю обратную связь " + SMILE;
+    private static final String HELP_TEXT = "Я даже не знаю чем вам можно помочь" + SMILE_WITH_TEAR +
+            "\n\nНо этот бот пока просто хрени пишет" +
+            "\n\nНажмите на /start чтобы поздороваться" +
+            "\nНажмите на /my_data и должна появиться информация о тебе, но ее пока нет " + SAD_AND_WORRIED +
+            "\nНажмите на /delete_data и можно удалить информацию о себе, но такого пока тоже нет " + SAD_AND_WORRIED +
+            "\nНажмите на /settings и можно изменить настройки бота" +
+            "\n\nПотом добавлю какую-нибудь обратную связь " + SMILE;
 
-    private static final String SETTINGS_TEXT = "А что ты тут настраивать собрался? Нету тут ничего настраивать";
+    private static final String SETTINGS_TEXT = "Нету тут ничего настраивать, ну по крайней мере пока";
 
     private final BotConfig config;
 
@@ -74,12 +75,14 @@ public class TelegramBot extends TelegramLongPollingBot {
                     sendMessage(chatId, HELP_TEXT);
                     break;
 
-                    case "/settings":
-                        sendMessage(chatId, SETTINGS_TEXT);
+                case "/settings":
+                    sendMessage(chatId, SETTINGS_TEXT);
+                    break;
 
                 default:
-                    sendMessage(chatId, "Такая команда пока не поддерживается :(");
-                    log.info("Unknown message from user: {}", update.getMessage().getChat().getFirstName());
+                    sendMessage(chatId, "Такая команда пока не поддерживается " + CRYING_FACE);
+                    log.info("Unknown message from user: {}\n" +
+                            "Text: {}", update.getMessage().getChat().getFirstName(), messageText);
             }
         }
     }
