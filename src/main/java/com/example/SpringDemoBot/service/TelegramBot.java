@@ -17,12 +17,20 @@ import java.util.List;
 @Component
 @Slf4j
 public class TelegramBot extends TelegramLongPollingBot {
+    private static final String SMILE = "\uD83D\uDE0A";
+    private static final String HEART = "❤";
+    private static final String STARS = "✨";
+    private static final String FIRE = "\uD83D\uDD25";
+
     private static final String HELP_TEXT = "Я даже не знаю чем вам можно помочь..\n\n" +
             "Но этот бот пока просто хрени пишет\n\n" +
             "Нажми на /start чтобы поздороваться\n\n" +
             "Нажми на /my_data и должна появиться информация о тебе, но ее пока нет :(\n\n" +
             "Нажми на /delete_data и можно удалить информацию о себе, но такого пока тоже нет :(\n\n" +
-            "Остального тоже пока ничего нет";
+            "Потом что нибудь добавлю обратную связь " + SMILE;
+
+    private static final String SETTINGS_TEXT = "А что ты тут настраивать собрался? Нету тут ничего настраивать";
+
     private final BotConfig config;
 
     public TelegramBot(BotConfig config) {
@@ -65,6 +73,9 @@ public class TelegramBot extends TelegramLongPollingBot {
                 case "/help":
                     sendMessage(chatId, HELP_TEXT);
                     break;
+
+                    case "/settings":
+                        sendMessage(chatId, SETTINGS_TEXT);
 
                 default:
                     sendMessage(chatId, "Такая команда пока не поддерживается :(");
