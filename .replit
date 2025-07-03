@@ -1,0 +1,8 @@
+modules = ["java-graalvm22.3"]
+run = "java -jar SpringDemoBot-0.0.1-SNAPSHOT.jar"
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "java -jar SpringDemoBot-0.0.1-SNAPSHOT.jar"]
