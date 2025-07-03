@@ -17,6 +17,12 @@ import java.util.List;
 @Component
 @Slf4j
 public class TelegramBot extends TelegramLongPollingBot {
+    private static final String HELP_TEXT = "Я даже не знаю чем вам можно помочь..\n\n" +
+            "Но этот бот пока просто хрени пишет\n\n" +
+            "Нажми на /start чтобы поздороваться\n\n" +
+            "Нажми на /my_data и должна появиться информация о тебе, но ее пока нет :(\n\n" +
+            "Нажми на /delete_data и можно удалить информацию о себе, но такого пока тоже нет :(\n\n" +
+            "Остального тоже пока ничего нет";
     private final BotConfig config;
 
     public TelegramBot(BotConfig config) {
@@ -54,6 +60,10 @@ public class TelegramBot extends TelegramLongPollingBot {
             switch (messageText) {
                 case "/start":
                     startCommandReceived(chatId, update.getMessage().getChat().getFirstName());
+                    break;
+
+                case "/help":
+                    sendMessage(chatId, HELP_TEXT);
                     break;
 
                 default:
