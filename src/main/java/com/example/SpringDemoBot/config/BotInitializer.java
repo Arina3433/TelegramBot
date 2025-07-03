@@ -1,6 +1,6 @@
 package com.example.SpringDemoBot.config;
 
-import com.example.SpringDemoBot.service.TelegramBot;
+import com.example.SpringDemoBot.service.TelegramBotService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -14,7 +14,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @AllArgsConstructor
 @Slf4j
 public class BotInitializer {
-    TelegramBot bot;
+    TelegramBotService bot;
 
     @EventListener({ContextRefreshedEvent.class})
     public void init() throws TelegramApiException {
@@ -22,7 +22,7 @@ public class BotInitializer {
         try {
             telegramBotsApi.registerBot(bot);
         } catch (TelegramApiException e) {
-            log.error("Error initializing bot: {}", e.getMessage());
+            log.error("\nError initializing bot: {}", e.getMessage());
         }
     }
 }
