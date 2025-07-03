@@ -7,8 +7,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @Getter
 public class BotConfig {
-    @Value("${bot.name}")
-    String botName;
-    @Value("${bot.token}")
-    String token;
+    private final String botName = System.getenv("BOT_NAME");
+    private final String token = System.getenv("BOT_TOKEN");
 }
