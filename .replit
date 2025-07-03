@@ -1,8 +1,9 @@
 modules = ["java-graalvm22.3"]
-run = "java -jar SpringDemoBot-0.0.1-SNAPSHOT.jar"
+
+run = "mvn clean spring-boot:run"
 
 [nix]
 channel = "stable-24_05"
 
 [deployment]
-run = ["sh", "-c", "java -jar SpringDemoBot-0.0.1-SNAPSHOT.jar"]
+run = ["sh", "-c", "mvn clean spring-boot:run"]
