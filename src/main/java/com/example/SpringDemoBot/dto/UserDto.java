@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import static com.example.SpringDemoBot.text.Emoji.SPARKLES;
 
@@ -18,9 +19,9 @@ public class UserDto {
     @Override
     public String toString() {
         return "Информация о вас " + SPARKLES + "\n" +
-                "Имя: " + firstName + "\n" +
-                "Фамилия: " + lastName + "\n" +
-                "Ник в Telegram: " + userName + "\n" +
+                "Имя: " + Optional.ofNullable(firstName).orElse("неизвестно") + "\n" +
+                "Фамилия: " + Optional.ofNullable(lastName).orElse("неизвестно") + "\n" +
+                "Ник в Telegram: " + Optional.ofNullable(userName).orElse("неизвестно") + "\n" +
                 "Дата регистрации в боте: " + registeredAt;
     }
 }
