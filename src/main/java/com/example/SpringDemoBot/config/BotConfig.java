@@ -1,18 +1,24 @@
 package com.example.SpringDemoBot.config;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @Getter
 public class BotConfig {
-    @Value("${bot.name}")
-    private String botName;
+    private final String botName;
+    private final String token;
 
-    @Value("${bot.token}")
-    private String token;
+    public BotConfig() {
+        Dotenv dotenv = Dotenv.configure()
+                .ignoreIfMissing()
+                .load();
+        this.botName = dotenv.get("BOT_NAME");
+        this.token = dotenv.get("BOT_TOKEN");
 
-//    private final String botName = System.getenv("BOT_NAME");
-//    private final String token = System.getenv("BOT_TOKEN");
+        if (botName == null || token == null) {
+            throw new IllegalStateException("BOT_NAME or BOT_TOKEN is not set in .env");
+        }
+    }
 }

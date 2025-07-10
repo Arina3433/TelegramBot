@@ -3,6 +3,7 @@ package com.example.SpringDemoBot.service.weather;
 import com.example.SpringDemoBot.dto.weather.WeatherResponseDto;
 import com.example.SpringDemoBot.formatter.WeatherFormatter;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.github.cdimascio.dotenv.Dotenv;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ import java.net.URL;
 @RequiredArgsConstructor
 @Slf4j
 public class WeatherService {
-    private static final String API_KEY = "9bf2893063f90b9c7f2011941537edee";
+    private static final String API_KEY = Dotenv.load().get("WEATHER_API_KEY");
     private static final String WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather?q=%s&units=metric&lang=ru&appid=%s";
 
     private final WeatherFormatter weatherFormatter;
